@@ -1,8 +1,10 @@
-package ps.eyad.loginfirebase;
+package ps.eyad.loginfirebase.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import ps.eyad.loginfirebase.R;
 
 public class MainActivity extends AppCompatActivity {
 
