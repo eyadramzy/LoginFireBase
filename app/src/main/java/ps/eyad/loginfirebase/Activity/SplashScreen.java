@@ -23,14 +23,14 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SplashScreen.this,SignInActivity.class));
-                finish();
+
             }
         });
         mBtnSplashSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SplashScreen.this, SignUpActivity.class));
-                finish();
+
             }
         });
     }
