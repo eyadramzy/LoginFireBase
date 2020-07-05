@@ -151,16 +151,7 @@ public class SignUpStep3Fragment extends Fragment {
     private void SignInWhithCerdentail(PhoneAuthCredential credential) {
         phoneNumber  = mEtSignUpMobileNumber.getText().toString();
         mListener.onFragmentStep3(phoneNumber,key);
-//        mAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<AuthResult> task) {
-//            if (task.isSuccessful()){
-//
-//            }else {
-//                Toast.makeText(getActivity(), ""+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//            }
-//        });
+
     }
 
     private void submit() {
