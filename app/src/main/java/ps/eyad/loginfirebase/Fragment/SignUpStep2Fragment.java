@@ -1,12 +1,15 @@
 package ps.eyad.loginfirebase.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+
+import androidx.fragment.app.Fragment;
 
 import ps.eyad.loginfirebase.R;
 
@@ -21,10 +24,15 @@ public class SignUpStep2Fragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private OnFragmentstep2Listener mListener;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private EditText mEtSignUpFirstName;
+    private EditText mEtSignUpLastName;
+    private EditText mEtSignUpDate;
+    private Spinner mSpSignUpGender;
+    private Button mBtnSignUp3Next;
 
     public SignUpStep2Fragment() {
         // Required empty public constructor
@@ -61,6 +69,58 @@ public class SignUpStep2Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up_step2, container, false);
+        View v = inflater.inflate(R.layout.fragment_sign_up_step2, container, false);
+        mEtSignUpFirstName = v.findViewById(R.id.et_signUp_FirstName);
+        mEtSignUpLastName = v.findViewById(R.id.et_signUp_LastName);
+        mEtSignUpDate = v.findViewById(R.id.et_signUp_date);
+        mSpSignUpGender = v.findViewById(R.id.sp_signUp_gender);
+        mBtnSignUp3Next = v.findViewById(R.id.btn_signUp3_next);
+        mBtnSignUp3Next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               String fName= mEtSignUpFirstName.getText().toString();
+                String lName= mEtSignUpLastName.getText().toString();
+                String date=mEtSignUpDate.getText().toString();
+                String gender;
+                if (mSpSignUpGender.getSelectedItemPosition() == 1) {
+                    gender = "Male";
+                } else {
+                    gender = "Female";
+                }
+                mListener.onFragmentStep2(fName,lName,date,gender);
+            }
+        });
+        return v;
+
+    }
+
+
+    public void onButtonPressed(String fName, String lName, String date, String gender) {
+        if (mListener != null) {
+            mListener.onFragmentStep2(fName, lName, date, gender);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentstep2Listener) {
+            mListener = (OnFragmentstep2Listener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentstep2Listener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+
+    public interface OnFragmentstep2Listener {
+        // TODO: Update argument type and name
+        void onFragmentStep2(String fName, String lName, String date, String gender);
     }
 }
